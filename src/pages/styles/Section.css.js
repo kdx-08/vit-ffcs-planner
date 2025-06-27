@@ -9,11 +9,11 @@ export const section = style({
 
 export const sechead = style({
   background: `linear-gradient(135deg,${vars.color.primary},black)`,
-  width: 'max-content',
   fontSize: 32,
   fontWeight: 700,
   color: 'transparent',
   backgroundClip: 'text',
+  textAlign: 'center',
 });
 
 export const secbody = style({
