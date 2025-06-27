@@ -33,7 +33,7 @@ const Timetable = () => {
                         <td className={day}>{item.day}</td>
                         {item.slots.map((slot,i)=>(
                             <>
-                            {index===0 && i===6 && <td className={lunch} rowSpan={data.days.length}>Lunch</td>}
+                            {index===0 && i===6 && <td className={lunch} rowSpan={data.days.length}>LUNCH</td>}
                             <td className={`${ttheader} ${tdefault}`} key={i}>{slot}</td>
                             </>
                         ))}
