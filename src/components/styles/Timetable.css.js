@@ -40,14 +40,16 @@ export const lunch=style({
     backgroundColor: vars.color.lunch,
     writingMode: 'vertical-lr',
     textAlign: 'center',
+    verticalAlign:'middle',
     letterSpacing: 4,
     textOrientation: 'upright',
-    fontWeight: 600,
+    fontWeight: 700,
     border: `1px solid ${vars.color.border}`,
+    lineHeight:'1.2'
 })
 
 export const day = style({
-  backgroundColor: vars.color.secondary,
+  backgroundColor: vars.color.primary,
   color: vars.color.base,
   fontWeight: 600,
   textAlign: 'center',
