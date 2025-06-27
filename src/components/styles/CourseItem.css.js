@@ -4,5 +4,5 @@ import { vars } from '../../style.css';
 export const item = style({
   margin: '1rem 0rem',
   padding: '1rem',
-  backgroundColor: vars.color.base,
+  backgroundColor: vars.color.accent,
 });

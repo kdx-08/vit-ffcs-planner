@@ -7,7 +7,7 @@ export const form = style({
   gap: '2rem',
   padding: '2rem',
   maxWidth: '600px',
-  backgroundColor: vars.color.base,
+  backgroundColor: vars.color.accent,
   margin: 'auto',
   borderRadius: '4px',
 });
@@ -26,7 +26,7 @@ export const label = style({
 export const input = style({
   flex: 1,
   padding: '0.5rem',
-  outline: 'none',
+  outlineColor: vars.color.secondary,
   border: 'none',
 });
 
