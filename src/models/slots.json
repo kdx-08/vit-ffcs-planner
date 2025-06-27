@@ -1,0 +1,52 @@
+{
+  "theoryHours": [
+    "8:00 AM\nto\n8:50 AM",
+    "8:55 AM\nto\n9:45 AM",
+    "9:50 AM\nto\n10:40 AM",
+    "10:45 AM\nto\n11:35 AM",
+    "11:40 AM\nto\n12:30 PM",
+    "12:35 PM\nto\n1:20 PM",
+    "2:00 PM\nto\n2:50 PM",
+    "2:55 PM\nto\n3:45 PM",
+    "3:50 PM\nto\n4:40 PM",
+    "4:45 PM\nto\n5:35 PM",
+    "5:40 PM\nto\n6:30 PM",
+    "6:35 PM\nto\n7:25 PM"
+  ],
+  "labHours": [
+    "08:00 AM\nto\n08:50 AM",
+    "08:50 AM\nto\n09:40 AM",
+    "09:50 AM\nto\n10:40 AM",
+    "10:40 AM\nto\n11:30 AM",
+    "11:40 AM\nto\n12:30 PM",
+    "12:30 PM\nto\n01:20 PM",
+    "02:00 PM\nto\n02:50 PM",
+    "02:50 PM\nto\n03:40 PM",
+    "03:50 PM\nto\n04:40 PM",
+    "04:40 PM\nto\n05:30 PM",
+    "05:40 PM\nto\n06:30 PM",
+    "06:30 PM\nto\n07:20 PM"
+  ],
+  "days": [
+    {
+      "day": "MON",
+      "slots": ["A1 / L1", "F1 / L2", "D1 / L3", "TB1 / L4", "TG1 / L5", "S11 / L6", "A2 / L31", "F2 / L32", "D2 / L33", "TB2 / L34", "TG2 / L35", "S3 / L36"]
+    },
+    {
+      "day": "TUE",
+      "slots": ["B1 / L7", "G1 / L8", "L1", "TC1 / L10", "TAA1 / L11", "L12", "B2 / L37", "G2 / L38", "L2 / L39", "TC2 / L40", "TAA2 / L41", "S1 / L42"]
+    },
+    {
+      "day": "WED",
+      "slots": ["C1 / L13", "A1 / L14", "F1 / L15", "TD1 / L16", "TBB1 / L17", "L18", "C2 / L43", "A2 / L44", "F2 / L45", "TD2 / L46", "TBB2 / L47", "S4 / L48"]
+    },
+    {
+      "day": "THU",
+      "slots": ["D1 / L19", "B1 / L20", "L1 / L21", "TE1 / L22", "TCC1 / L23", "L24", "D2 / L49", "B2 / L50", "L2 / L51", "TE2 / L52", "TCC2 / L53", "S2 / L54"]
+    },
+    {
+      "day": "FRI",
+      "slots": ["E1 / L25", "C1 / L26", "TA1 / L27", "TF1 / L28", "TDD1 / L29", "S15 / L30", "E2 / L55", "C2 / L56", "TA2 / L57", "TF2 / L58", "TDD2 / L59", "L60"]
+    }
+  ]
+}
