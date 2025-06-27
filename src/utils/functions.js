@@ -13,7 +13,5 @@ export const validate = (code, slotList, facList) => {
     if (oldData.find((i) => i.code === code)) return 'exists';
   }
   if (slotList.length !== facList.length) return 'invalid';
-  const newData = [...oldData, { code, slots: slotList, facs: facList }];
-  saveData(newData);
   return 'valid';
 };

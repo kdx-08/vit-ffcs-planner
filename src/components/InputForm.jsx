@@ -3,7 +3,7 @@ import { form, input, label, reset, addBtn, section, buttons } from './styles/In
 import { toast, Toaster } from 'react-hot-toast';
 import { validate } from '../utils/functions.js';
 
-const InputForm = () => {
+const InputForm = ({ handleAdd }) => {
   const [code, setCode] = useState('');
   const [slots, setSlots] = useState('');
   const [faculties, setFaculties] = useState('');
@@ -30,6 +30,7 @@ const InputForm = () => {
       else if (validate(course, slotList, facList) === 'invalid')
         toast.error('Slot and faculty count should be same');
       else {
+        handleAdd({ code: course, slots: slotList, facs: facList });
         toast.success('Added course');
         setCode('');
         setSlots('');
@@ -56,6 +57,7 @@ const InputForm = () => {
           id="ccode"
           value={code}
           onChange={handleCode}
+          autoFocus
         />
       </div>
       <div className={section}>
