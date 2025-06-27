@@ -10,3 +10,14 @@
     Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: 1rem;
 }
+
+/* CSS color variables */
+
+:root {
+  --color-primary: #1e60ff;
+  --color-secondary: #3a8dff;
+  --color-accent: #5abcf5;
+  --color-base: #dedede;
+  --color-text: #1a1a1a;
+  --color-muted: #7a7a7a;
+}
