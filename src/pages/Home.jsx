@@ -1,5 +1,6 @@
 import { hero, h1, p, container, button, footer } from './styles/Home.css';
 import { useNavigate } from 'react-router';
+import Navbar from '../components/Navbar';
 
 const Home = () => {
   const year = new Date().getFullYear();
@@ -11,6 +12,7 @@ const Home = () => {
 
   return (
     <div className={container}>
+      <Navbar />
       <main className={hero}>
         <h1 className={h1}>VIT FFCS Planner</h1>
         <div>

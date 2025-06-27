@@ -8,10 +8,18 @@ import { useEffect } from 'react';
 
 const App = () => {
   useEffect(() => {
+    const metaChar = document.createElement('meta');
+    metaChar.setAttribute('charset', 'UTF-8');
+    document.head.appendChild(metaChar);
+    const metaView = document.createElement('meta');
+    metaView.setAttribute('name', 'viewport');
+    metaView.setAttribute('content', 'width=device-width, initial-scale=1.0');
+    document.head.appendChild(metaView);
+    document.title = 'VIT FFCS Planner';
     const styles = document.createElement('style');
     styles.textContent = globalStyles;
     document.head.appendChild(styles);
-  });
+  }, []);
 
   return (
     <div className={themeClass}>

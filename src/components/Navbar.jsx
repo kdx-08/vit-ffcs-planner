@@ -19,6 +19,7 @@ const Navbar = () => {
           color: 'black',
         }}
         href="https://github.com/kdx-08/vit-ffcs-planner"
+        target="_blank"
       >
         <FaGithub size={22} /> Github
       </a>

@@ -8,8 +8,6 @@ export const navbar = style({
   justifyContent: 'space-between',
   padding: 20,
   height: 60,
-  margin: 20,
-  borderRadius: 50,
 });
 
 globalStyle(`${navbar} a`, {

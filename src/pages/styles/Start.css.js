@@ -1,5 +1,7 @@
 import { style } from '@vanilla-extract/css';
 
 export const container = style({
-  margin: '1rem',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '2rem',
 });
