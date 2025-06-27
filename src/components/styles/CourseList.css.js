@@ -1,5 +1,4 @@
 import { style } from '@vanilla-extract/css';
-import { vars } from '../../style.css';
 
 export const list = style({
   marginTop: '4rem',

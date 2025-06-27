@@ -1,4 +1,3 @@
-import { themeClass } from '../style.css';
 import { item } from './styles/CourseItem.css';
 
 const CourseItem = () => {
