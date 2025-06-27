@@ -3,8 +3,16 @@ import Home from './pages/Home';
 import Start from './pages/Start';
 import Render from './pages/Render';
 import { themeClass } from './style.css';
+import { globalStyles } from './style.css';
+import { useEffect } from 'react';
 
 const App = () => {
+  useEffect(() => {
+    const styles = document.createElement('style');
+    styles.textContent = globalStyles;
+    document.head.appendChild(styles);
+  });
+
   return (
     <div className={themeClass}>
       <Routes>
