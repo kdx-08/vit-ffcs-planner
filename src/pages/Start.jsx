@@ -27,7 +27,7 @@ const Start = () => {
     <div className={container}>
       <Navbar />
       <InputForm handleAdd={handleAdd} />
-      <CourseList courses={courses} handleAdd={handleAdd} handleDelete={handleDelete} />
+      <CourseList courses={courses || []} handleAdd={handleAdd} handleDelete={handleDelete} />
     </div>
   );
 };
