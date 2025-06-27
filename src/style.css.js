@@ -12,5 +12,11 @@ export const [themeClass,vars]=createTheme({
 });
 
 export const body=style({
-    
+
+})
+
+export const ttheader=style({
+    display:'flex',
+    alignItems:'center',
+    flexDirection:'column',
 })
