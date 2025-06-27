@@ -1,16 +1,22 @@
 import CourseItem from './CourseItem';
-import { list } from './styles/CourseList.css';
 import { sechead } from '../pages/styles/Section.css';
+import { noCaption } from './styles/CourseList.css';
 
 const CourseList = ({ courses, handleDelete }) => {
   return (
-    <div className={list}>
+    <div>
       <h2 className={sechead}>Course List</h2>
       <hr />
       <div>
-        {courses.map((course, index) => (
-          <CourseItem course={course} handleDelete={handleDelete} key={index} />
-        ))}
+        {courses.length > 0 ? (
+          courses.map((course, index) => (
+            <CourseItem course={course} handleDelete={handleDelete} key={index} />
+          ))
+        ) : (
+          <p className={noCaption}>
+            There are no courses in the timetable, add one to see it here!
+          </p>
+        )}
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import InputForm from '../components/InputForm';
 import CourseList from '../components/CourseList';
 import { getData, saveData } from '../utils/functions';
 import { useState, useEffect } from 'react';
+import Navbar from '../components/Navbar';
 
 const Start = () => {
   const [courses, setCourses] = useState([]);
@@ -24,6 +25,7 @@ const Start = () => {
 
   return (
     <div className={container}>
+      <Navbar />
       <InputForm handleAdd={handleAdd} />
       <CourseList courses={courses} handleAdd={handleAdd} handleDelete={handleDelete} />
     </div>

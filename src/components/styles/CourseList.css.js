@@ -1,12 +1,17 @@
 import { style } from '@vanilla-extract/css';
-
-export const list = style({
-  marginTop: '4rem',
-});
+import { vars } from '../../style.css';
 
 export const heading = style({
   textAlign: 'center',
   fontSize: '2rem',
   fontWeight: 'bold',
   marginBottom: '1rem',
+});
+
+export const noCaption = style({
+  textAlign: 'center',
+  fontWeight: 'bold',
+  fontSize: '1.5rem',
+  color: vars.color.text,
+  marginTop: '2rem',
 });
