@@ -1,4 +1,4 @@
-import { createTheme,globalStyle,style } from "@vanilla-extract/css";
+import { createTheme } from '@vanilla-extract/css';
 
 export const [themeClass, vars] = createTheme({
   color: {
@@ -12,6 +12,6 @@ export const [themeClass, vars] = createTheme({
     lunch: '#ffd166',
     thead: '#a3cef1',
     cell: '#D1F8EF',
-    border: '#d6d6d6'
+    border: '#d6d6d6',
   },
 });

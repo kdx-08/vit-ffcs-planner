@@ -1,52 +1,52 @@
-import { style } from "@vanilla-extract/css";
-import { vars } from "../../style.css";
+import { style } from '@vanilla-extract/css';
+import { vars } from '../../style.css';
 
-export const ttheader=style({
-    textAlign: 'center',
-    fontSize: 14,
-    whiteSpace: 'pre-line',
-    padding: '10px 8px',
-    fontWeight: 600,
-    border: `1px solid ${vars.color.border}`,
-    backgroundColor: vars.color.primary,
-    color: vars.color.base
-})
-
-export const theader=style({
-    border:'1px solid',
-    backgroundColor: vars.color.secondary,
-    color:vars.color.base,
-    fontWeight:600,
-    textAlign:'center',
-    border:`1px solid ${vars.color.border}`
+export const ttheader = style({
+  textAlign: 'center',
+  fontSize: 14,
+  whiteSpace: 'pre-line',
+  padding: '10px 8px',
+  fontWeight: 600,
+  border: `1px solid ${vars.color.border}`,
+  backgroundColor: vars.color.primary,
+  color: vars.color.base,
 });
 
-export const table=style({
-    borderCollapse:'collapse',
-})
+export const theader = style({
+  border: '1px solid',
+  backgroundColor: vars.color.secondary,
+  color: vars.color.base,
+  fontWeight: 600,
+  textAlign: 'center',
+  border: `1px solid ${vars.color.border}`,
+});
 
-export const tdefault=style({
-    backgroundColor:"aliceblue",
-    color:'black',
-    selectors:{
-        '&:hover':{
-            backgroundColor:vars.color.thead,
-            cursor:'pointer'
-        }
-    }
-})
+export const table = style({
+  borderCollapse: 'collapse',
+});
 
-export const lunch=style({
-    backgroundColor: vars.color.lunch,
-    writingMode: 'vertical-lr',
-    textAlign: 'center',
-    verticalAlign:'middle',
-    letterSpacing: 4,
-    textOrientation: 'upright',
-    fontWeight: 700,
-    border: `1px solid ${vars.color.border}`,
-    lineHeight:'1.2'
-})
+export const tdefault = style({
+  backgroundColor: 'aliceblue',
+  color: 'black',
+  selectors: {
+    '&:hover': {
+      backgroundColor: vars.color.thead,
+      cursor: 'pointer',
+    },
+  },
+});
+
+export const lunch = style({
+  backgroundColor: vars.color.lunch,
+  writingMode: 'vertical-lr',
+  textAlign: 'center',
+  verticalAlign: 'middle',
+  letterSpacing: 4,
+  textOrientation: 'upright',
+  fontWeight: 700,
+  border: `1px solid ${vars.color.border}`,
+  lineHeight: '1.2',
+});
 
 export const day = style({
   backgroundColor: vars.color.primary,
