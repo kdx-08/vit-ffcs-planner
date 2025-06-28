@@ -10,7 +10,12 @@ const CourseList = ({ courses, handleDelete }) => {
       <div>
         {courses.length > 0 ? (
           courses.map((course, index) => (
-            <CourseItem course={course} handleDelete={handleDelete} key={index} />
+            <CourseItem
+              course={course}
+              handleDelete={handleDelete}
+              id={course.id}
+              key={course.id}
+            />
           ))
         ) : (
           <p className={noCaption}>
