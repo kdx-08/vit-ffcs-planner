@@ -1,5 +1,7 @@
 export const getData = () => {
-  return JSON.parse(localStorage.getItem('ffcs_planner_data'));
+  if (localStorage.getItem('ffcs_planner_data'))
+    return JSON.parse(localStorage.getItem('ffcs_planner_data'));
+  return [];
 };
 
 export const saveData = (obj) => {
@@ -10,8 +12,10 @@ export const saveData = (obj) => {
 export const validate = (code, slotList, facList) => {
   const oldData = getData() || [];
   if (oldData) {
-    if (oldData.find((i) => i.code === code)) return 'exists';
+    const existItem = oldData.find((i) => i.code === code);
+    if (existItem) {
+      if (existItem.slots === slotList && existItem.facs === facList) return 'exists';
+    }
   }
-  if (slotList.length !== facList.length) return 'invalid';
   return 'valid';
 };

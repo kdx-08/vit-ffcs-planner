@@ -13,9 +13,9 @@ const Start = () => {
     setCourses(data);
   }, []);
 
-  const handleDelete = (code) => {
-    saveData(courses.filter((c) => c.code !== code));
-    setCourses((oldCourses) => oldCourses.filter((c) => c.code !== code));
+  const handleDelete = (id) => {
+    saveData(courses.filter((c) => c.id !== id));
+    setCourses((oldCourses) => oldCourses.filter((c) => c.id !== id));
   };
 
   const handleAdd = (course) => {
@@ -27,7 +27,7 @@ const Start = () => {
     <div className={container}>
       <Navbar />
       <InputForm handleAdd={handleAdd} />
-      <CourseList courses={courses || []} handleAdd={handleAdd} handleDelete={handleDelete} />
+      <CourseList courses={courses} handleDelete={handleDelete} />
     </div>
   );
 };
