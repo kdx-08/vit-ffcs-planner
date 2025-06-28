@@ -16,6 +16,7 @@ export const section = style({
   gap: '2rem',
   display: 'flex',
   alignItems: 'center',
+  position: 'relative',
 });
 
 export const label = style({
@@ -26,6 +27,7 @@ export const label = style({
 export const input = style({
   flex: 1,
   padding: '0.5rem',
+  backgroundColor: 'white',
   outlineColor: vars.color.secondary,
   border: 'none',
 });
@@ -52,4 +54,24 @@ export const reset = style({
   border: 'none',
   borderRadius: '4px',
   cursor: 'pointer',
+});
+
+export const suggestion = style({
+  position: 'absolute',
+  top: '2.5rem',
+  backgroundColor: vars.color.secondary,
+  zIndex: 2,
+  borderRadius: '5px',
+  width:'100%',
+});
+
+export const suggestitem = style({
+  padding: '8px 10px',
+  borderRadius:'5px',
+  cursor:'pointer',
+  selectors:{
+    '&:hover':{
+      backgroundColor:vars.color.thead
+    }
+  }
 });
