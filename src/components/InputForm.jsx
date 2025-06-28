@@ -1,23 +1,85 @@
 import { useState } from 'react';
-import { form, input, label, reset, addBtn, section, buttons } from './styles/InputForm.css.js';
+import {
+  form,
+  input,
+  label,
+  reset,
+  addBtn,
+  section,
+  buttons,
+  suggestion,
+  suggestitem,
+} from './styles/InputForm.css.js';
 import { toast, Toaster } from 'react-hot-toast';
 import { validate } from '../utils/functions.js';
+import data from '../models/fall.json';
 
 const InputForm = ({ handleAdd }) => {
+  const [sem, setSem] = useState('');
   const [code, setCode] = useState('');
-  const [slots, setSlots] = useState('');
-  const [faculties, setFaculties] = useState('');
+  const [name, setName] = useState('');
+  const [slots, setSlots] = useState([]);
+  const [faculties, setFaculties] = useState([]);
+  const [coursesuggestion, setCoursesuggestion] = useState([]);
+  const [selectedSlot, setSelectedSlot] = useState('');
+  const [selectedFaculty, setSelectedFaculty] = useState('');
+
+  const handleSem = (e) => {
+    setSem(e.target.value.toUpperCase());
+  };
 
   const handleCode = (e) => {
-    setCode(e.target.value.toUpperCase());
+    const input = e.target.value.toUpperCase();
+    setCode(input);
+    const suggestions = data
+      .filter(
+        (item) =>
+          item['COURSE CODE'].includes(input) || item['COURSE TITLE'].toUpperCase().includes(input)
+      )
+      .reduce(
+        (acc, item) => {
+          const key = `${item['COURSE CODE']} - ${item['COURSE TITLE']}`;
+          if (!acc.map.has(key)) {
+            acc.map.set(key, true);
+            acc.items.push({
+              display: key,
+              code: item['COURSE CODE'],
+              title: item['COURSE TITLE'],
+              slots: [item['SLOT']],
+              faculties: [item['EMPLOYEE NAME']],
+            });
+          } else {
+            const existing = acc.items.find((i) => i.code === item['COURSE CODE']);
+            existing.slots.push(item.SLOT);
+            existing.faculties.push(item['EMPLOYEE NAME']);
+          }
+          return acc;
+        },
+        { items: [], map: new Map() }
+      ).items;
+    setCoursesuggestion(suggestions);
+    setName('');
   };
 
-  const handleSlots = (e) => {
-    setSlots(e.target.value.toUpperCase());
+  const handleCourse = (item) => {
+    setCode(item.code);
+    setName(item.title);
+    setSlots(item.slots);
+    setFaculties(item.faculties);
   };
 
-  const handleFaculties = (e) => {
-    setFaculties(e.target.value.toUpperCase());
+  const handleSlot = (e) => {
+    const slotarr = e.target.value;
+    var slotstr = '';
+    for (var i = 0; i < slotarr.length() - 1; i++) {
+      slotstr += `_${slotarr[i]}_,`;
+    }
+    slotstr += `_${slotarr[slotarr.length() - 1]}_`;
+    setSelectedSlot(slotstr.toUpperCase());
+  };
+
+  const handleFaculty = (e) => {
+    setSelectedFaculty(e.target.value.toUpperCase());
   };
 
   const handleForm = (e) => {
@@ -45,6 +107,15 @@ const InputForm = ({ handleAdd }) => {
   return (
     <form className={form} onSubmit={handleForm}>
       <div className={section}>
+        <label className={label} htmlFor="sem">
+          Semester:
+        </label>
+        <select className={input} name="sem" id="sem" onChange={handleSem} value={sem}>
+          <option value="fall">Fall Semester</option>
+          <option value="winter">Winter Semester</option>
+        </select>
+      </div>
+      <div className={section}>
         <label className={label} htmlFor="ccode">
           Course Code:
         </label>
@@ -55,40 +126,66 @@ const InputForm = ({ handleAdd }) => {
           type="text"
           name="ccode"
           id="ccode"
-          value={code}
+          value={`${code}${name.length > 0 ? ' - ' + name : ''}`}
           onChange={handleCode}
           autoFocus
         />
+        {!name && coursesuggestion.length > 0 && code.length > 0 ? (
+          <ul className={suggestion}>
+            {coursesuggestion.slice(0, 10).map((item, index) => (
+              <li className={suggestitem} key={index} onClick={() => handleCourse(item)}>
+                {item.display.slice(0, 42)}..
+              </li>
+            ))}
+          </ul>
+        ) : (
+          ''
+        )}
       </div>
       <div className={section}>
         <label className={label} htmlFor="slots">
           Slot List:
         </label>
-        <input
-          required
-          placeholder="A1+TA1, G1+TG1"
-          className={input}
-          type="text"
+
+        <select
           name="slots"
           id="slots"
-          value={slots}
-          onChange={handleSlots}
-        />
+          disabled={slots.length == 0}
+          className={input}
+          onChange={handleSlot}
+          value={selectedSlot}
+        >
+          <option disabled selected>
+            Select Slot
+          </option>
+          {slots.map((item, index) => (
+            <option key={index} value={item}>
+              {item}
+            </option>
+          ))}
+        </select>
       </div>
       <div className={section}>
         <label className={label} htmlFor="faculties">
           Faculties:
         </label>
-        <input
-          required
-          placeholder="Faculty A, Faculty B"
-          className={input}
-          type="text"
+        <select
           name="faculties"
           id="faculties"
-          value={faculties}
-          onChange={handleFaculties}
-        />
+          disabled={faculties.length == 0}
+          className={input}
+          onChange={handleFaculty}
+          value={selectedFaculty}
+        >
+          <option selected disabled>
+            Select Faculty
+          </option>
+          {faculties.map((item, index) => (
+            <option key={index} value={item}>
+              {item}
+            </option>
+          ))}
+        </select>
       </div>
       <div className={buttons}>
         <button type="reset" className={reset}>
