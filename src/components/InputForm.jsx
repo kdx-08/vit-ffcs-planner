@@ -4,9 +4,15 @@ import { toast, Toaster } from 'react-hot-toast';
 import { validate } from '../utils/functions.js';
 
 const InputForm = ({ handleAdd }) => {
+  const date = new Date().getMonth();
+  const [sem, setSem] = useState(date >= 5 && date <= 10 ? 'fall' : 'winter');
   const [code, setCode] = useState('');
   const [slots, setSlots] = useState('');
   const [faculties, setFaculties] = useState('');
+
+  const handleSem=(e)=>{
+    setSem(e.target.value.toUpperCase());
+  }
 
   const handleCode = (e) => {
     setCode(e.target.value.toUpperCase());
@@ -44,6 +50,19 @@ const InputForm = ({ handleAdd }) => {
 
   return (
     <form className={form} onSubmit={handleForm}>
+      <div className={section}>
+        <label className={label} htmlFor="sem">
+          Semester:
+        </label>
+        <select className={input} name="sem" id="sem" onChange={handleSem}>
+          <option selected={date >= 5 && date <= 10} value="fall">
+            Fall Semester
+          </option>
+          <option selected={date == 11 || (date >= 0 && date <= 4)} value="winter">
+            Winter Semester
+          </option>
+        </select>
+      </div>
       <div className={section}>
         <label className={label} htmlFor="ccode">
           Course Code:

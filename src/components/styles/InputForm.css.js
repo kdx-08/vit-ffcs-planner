@@ -26,6 +26,7 @@ export const label = style({
 export const input = style({
   flex: 1,
   padding: '0.5rem',
+  backgroundColor:'white',
   outlineColor: vars.color.secondary,
   border: 'none',
 });

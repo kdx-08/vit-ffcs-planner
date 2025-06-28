@@ -12,7 +12,7 @@ export const navbar = style({
 
 globalStyle(`${navbar} a`, {
   textDecoration: 'none',
-  color: vars.color.base,
+  color: 'white',
   fontSize: 22,
   fontWeight: 600,
 });
