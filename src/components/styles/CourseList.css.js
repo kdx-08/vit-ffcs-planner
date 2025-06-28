@@ -8,6 +8,10 @@ export const heading = style({
   marginBottom: '1rem',
 });
 
+export const courseContainer = style({
+  margin: '0rem 1rem',
+});
+
 export const noCaption = style({
   textAlign: 'center',
   fontWeight: 'bold',
