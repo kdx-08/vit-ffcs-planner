@@ -75,3 +75,8 @@ export const suggestitem = style({
     },
   },
 });
+
+export const light = style({
+  color: vars.color.muted,
+  cursor: 'not-allowed',
+});

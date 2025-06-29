@@ -19,3 +19,7 @@ export const noCaption = style({
   color: vars.color.text,
   marginTop: '2rem',
 });
+
+export const listTitle = style({
+  fontWeight: 600,
+});
