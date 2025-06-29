@@ -31,9 +31,10 @@ export const tdefault = style({
   selectors: {
     '&:hover': {
       backgroundColor: vars.color.thead,
-      cursor: 'pointer',
     },
   },
+  height: '80px',
+  width: '80px',
 });
 
 export const lunch = style({
@@ -55,4 +56,18 @@ export const day = style({
   textAlign: 'center',
   padding: '8px',
   border: `1px solid ${vars.color.border}`,
+});
+
+export const filled = style({
+  backgroundColor: 'lime',
+  ':hover': {
+    backgroundColor: 'lime',
+  },
+});
+
+export const clash = style({
+  backgroundColor: 'red',
+  ':hover': {
+    backgroundColor: 'red',
+  },
 });

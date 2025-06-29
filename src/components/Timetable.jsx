@@ -1,7 +1,42 @@
+import { useEffect, useState } from 'react';
 import data from '../models/slots.json';
-import { table, theader, ttheader, day, lunch, tdefault } from './styles/Timetable.css';
+import {
+  table,
+  theader,
+  ttheader,
+  day,
+  lunch,
+  tdefault,
+  filled,
+  clash,
+} from './styles/Timetable.css';
+import { getData, transform } from '../utils/functions';
+import { getTemplate } from '../utils/template';
+import toast from 'react-hot-toast';
 
 const Timetable = () => {
+  const [timetableData, setTimeTableData] = useState(getData());
+  const timetable = getTemplate();
+
+  useEffect(() => {
+    for (let course of timetableData) {
+      const slots = transform(course.slots.split(',').map((s) => s.toLowerCase()));
+      for (let slot of slots) {
+        const block = document.getElementById(slot);
+        if (!timetable[slot].isFilled) {
+          timetable[slot].code = course.code;
+          timetable[slot].isFilled = true;
+          block.classList.add(filled);
+          block.innerText = course.code;
+        } else {
+          console.log(`${course.code} is clashing`);
+          block.innerText += ` ${course.code}`;
+          block.classList.add(clash);
+        }
+      }
+    }
+  }, []);
+
   return (
     <div>
       <br />
@@ -48,7 +83,9 @@ const Timetable = () => {
                   <td
                     className={`${ttheader} ${tdefault}`}
                     key={i}
-                    id={slot.split(' / ')[0] + slot.split(' / ')[1]}
+                    id={`_${slot.split(' / ')[0].toLowerCase()}_${slot
+                      .split(' / ')[1]
+                      ?.toLowerCase()}_`}
                   >
                     {slot}
                   </td>
