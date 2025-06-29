@@ -15,7 +15,15 @@ import { toast, Toaster } from 'react-hot-toast';
 import { validate } from '../utils/functions.js';
 import { v7 } from 'uuid';
 
-const InputForm = ({ handleAdd,handleCode,handleCourse,coursesuggestion,code,name,handleReset}) => {
+const InputForm = ({
+  handleAdd,
+  handleCode,
+  handleCourse,
+  coursesuggestion,
+  code,
+  name,
+  handleReset,
+}) => {
   const [sem, setSem] = useState('');
   const handleSem = (e) => {
     setSem(e.target.value.toUpperCase());
@@ -76,8 +84,14 @@ const InputForm = ({ handleAdd,handleCode,handleCourse,coursesuggestion,code,nam
         )}
       </div>
       <div className={section}>
-        <label className={`${label} ${name?"":light}`} htmlFor='title'>Title:</label>
-        {name?<span className={input}>{name}</span>:<span className={`${input} ${light}`}>Course Title</span>}
+        <label className={`${label} ${name ? '' : light}`} htmlFor="title">
+          Title:
+        </label>
+        {name ? (
+          <span className={input}>{name}</span>
+        ) : (
+          <span className={`${input} ${light}`}>Course Title</span>
+        )}
       </div>
       <div className={buttons}>
         <button className={reset} onClick={handleReset}>
@@ -87,7 +101,17 @@ const InputForm = ({ handleAdd,handleCode,handleCourse,coursesuggestion,code,nam
           Add Course
         </button>
       </div>
-      <Toaster />
+      <Toaster
+        position="bottom-center"
+        reverseOrder={true}
+        toastOptions={{
+          style: {
+            background: '#1e60ff',
+            color: 'white',
+            bottom:'20px'
+          },
+        }}
+      />
     </form>
   );
 };
