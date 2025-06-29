@@ -24,7 +24,7 @@ const InputForm = ({ handleAdd }) => {
   const [coursesuggestion, setCoursesuggestion] = useState([]);
   const [selectedSlot, setSelectedSlot] = useState('');
   const [selectedFaculty, setSelectedFaculty] = useState('');
-
+  const [selectedSlotOg, setSelectedSlotOg] = useState('');
   const handleSem = (e) => {
     setSem(e.target.value.toUpperCase());
   };
@@ -70,17 +70,37 @@ const InputForm = ({ handleAdd }) => {
   };
 
   const handleSlot = (e) => {
-    const slotarr = e.target.value.split('+');
+    const input = e.target.value;
+    setSelectedSlotOg(input);
+    const slotarr = input.split('+');
     var slotstr = '';
     for (var i = 0; i < slotarr.length - 1; i++) {
       slotstr += `_${slotarr[i]}_,`;
     }
     slotstr += `_${slotarr[slotarr.length - 1]}_`;
     setSelectedSlot(slotstr.toUpperCase());
+    const matchingFaculties = data
+      .filter((item) => item['COURSE CODE'] === code && item.SLOT === input)
+      .map((item) => item['EMPLOYEE NAME'].toUpperCase());
+    setFaculties([...new Set(matchingFaculties)]);
+    if (!matchingFaculties.includes(selectedFaculty.toUpperCase())) {
+      setSelectedFaculty('');
+    }
   };
 
   const handleFaculty = (e) => {
-    setSelectedFaculty(e.target.value.toUpperCase());
+    const input = e.target.value.toUpperCase();
+    setSelectedFaculty(input);
+    const matchingSlots = data
+      .filter(
+        (item) => item['COURSE CODE'] === code && item['EMPLOYEE NAME'].toUpperCase() === input
+      )
+      .map((item) => item.SLOT.toUpperCase());
+    setSlots([...new Set(matchingSlots)]);
+    if (!matchingSlots.includes(selectedSlotOg.toUpperCase())) {
+      setSelectedSlot('');
+      setSelectedSlotOg('');
+    }
   };
 
   const handleForm = (e) => {
@@ -138,8 +158,9 @@ const InputForm = ({ handleAdd }) => {
           disabled={slots.length == 0}
           className={input}
           onChange={handleSlot}
+          value={selectedSlotOg}
         >
-          <option disabled selected>
+          <option value="" disabled hidden>
             Select Slot
           </option>
           {slots.map((item, index) => (
@@ -159,8 +180,9 @@ const InputForm = ({ handleAdd }) => {
           disabled={faculties.length == 0}
           className={input}
           onChange={handleFaculty}
+          value={selectedFaculty}
         >
-          <option selected disabled>
+          <option value="" disabled hidden>
             Select Faculty
           </option>
           {faculties.map((item, index) => (
