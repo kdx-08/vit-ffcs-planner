@@ -6,7 +6,7 @@ export const form = style({
   flexDirection: 'column',
   gap: '2rem',
   padding: '2rem',
-  maxWidth: '600px',
+  width: '600px',
   backgroundColor: vars.color.accent,
   margin: 'auto',
   borderRadius: '4px',
@@ -62,16 +62,16 @@ export const suggestion = style({
   backgroundColor: vars.color.secondary,
   zIndex: 2,
   borderRadius: '5px',
-  width:'100%',
+  width: '100%',
 });
 
 export const suggestitem = style({
   padding: '8px 10px',
-  borderRadius:'5px',
-  cursor:'pointer',
-  selectors:{
-    '&:hover':{
-      backgroundColor:vars.color.thead
-    }
-  }
+  borderRadius: '5px',
+  cursor: 'pointer',
+  selectors: {
+    '&:hover': {
+      backgroundColor: vars.color.thead,
+    },
+  },
 });

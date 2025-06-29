@@ -70,12 +70,12 @@ const InputForm = ({ handleAdd }) => {
   };
 
   const handleSlot = (e) => {
-    const slotarr = e.target.value;
+    const slotarr = e.target.value.split('+');
     var slotstr = '';
-    for (var i = 0; i < slotarr.length() - 1; i++) {
+    for (var i = 0; i < slotarr.length - 1; i++) {
       slotstr += `_${slotarr[i]}_,`;
     }
-    slotstr += `_${slotarr[slotarr.length() - 1]}_`;
+    slotstr += `_${slotarr[slotarr.length - 1]}_`;
     setSelectedSlot(slotstr.toUpperCase());
   };
 
@@ -85,22 +85,9 @@ const InputForm = ({ handleAdd }) => {
 
   const handleForm = (e) => {
     e.preventDefault();
-    try {
-      const course = code.trim();
-      const slot = slots.trim();
-      const fac = faculties.trim();
-      if (validate(course, slot, fac) === 'exists') toast.error('Course already exists');
-      else {
-        handleAdd({ id: v7(), code: course, slots: slot, facs: fac });
-        toast.success('Added course');
-        setCode('');
-        setSlots('');
-        setFaculties('');
-      }
-    } catch (error) {
-      console.log(error);
-      toast.error('Something went wrong');
-    }
+    console.log(code);
+    console.log(selectedSlot);
+    console.log(selectedFaculty);
   };
 
   return (
@@ -151,7 +138,6 @@ const InputForm = ({ handleAdd }) => {
           disabled={slots.length == 0}
           className={input}
           onChange={handleSlot}
-          value={selectedSlot}
         >
           <option disabled selected>
             Select Slot
@@ -173,7 +159,6 @@ const InputForm = ({ handleAdd }) => {
           disabled={faculties.length == 0}
           className={input}
           onChange={handleFaculty}
-          value={selectedFaculty}
         >
           <option selected disabled>
             Select Faculty
