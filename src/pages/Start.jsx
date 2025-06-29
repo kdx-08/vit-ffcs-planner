@@ -4,7 +4,6 @@ import CourseList from '../components/CourseList';
 import { getData, saveData } from '../utils/functions';
 import { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
-import data from '../models/fall.json';
 import toast from 'react-hot-toast';
 
 const Start = () => {
@@ -12,6 +11,26 @@ const Start = () => {
   const [code, setCode] = useState('');
   const [name, setName] = useState('');
   const [coursesuggestion, setCoursesuggestion] = useState([]);
+  const date = new Date();
+  const [sem, setSem] = useState(date.getMonth() >= 5 && date.getMonth() <= 10 ? 'fall' : 'winter');
+  const [data,setData]=useState([]);
+
+  useEffect(()=>{
+    async function loadData(){
+      try{
+        let module;
+        if(sem==='fall'){
+          module = await import('../models/fall.json');
+        }else{
+          module = await import('../models/winter.json');
+        }
+        setData(module.default);
+      }catch(error){
+        console.log('Error loading JSON: ',error);
+      }
+    }
+    loadData();
+  },[sem])
 
   useEffect(() => {
     const data = getData();
@@ -21,7 +40,7 @@ const Start = () => {
   const handleDelete = (id) => {
     saveData(courses.filter((c) => c.id !== id));
     setCourses((oldCourses) => oldCourses.filter((c) => c.id !== id));
-    toast.success("Course Deleted Successfully");
+    toast.success('Course Deleted Successfully');
   };
 
   const handleAdd = (course) => {
@@ -32,7 +51,7 @@ const Start = () => {
   const handleChange = (course) => {
     saveData([...courses.filter((c) => c.id !== course.id), course]);
     setCourses(getData());
-    toast.success("Course Updated Successfully");
+    toast.success('Course Updated Successfully');
   };
 
   const handleCode = (e) => {
@@ -90,6 +109,8 @@ const Start = () => {
         coursesuggestion={coursesuggestion}
         code={code}
         name={name}
+        sem={sem}
+        setSem={setSem}
       />
       <CourseList
         courses={courses}

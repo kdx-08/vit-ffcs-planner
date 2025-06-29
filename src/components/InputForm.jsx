@@ -23,10 +23,11 @@ const InputForm = ({
   code,
   name,
   handleReset,
+  sem,
+  setSem,
 }) => {
-  const [sem, setSem] = useState('');
   const handleSem = (e) => {
-    setSem(e.target.value.toUpperCase());
+    setSem(e.target.value);
   };
 
   const handleForm = (e) => {
@@ -108,7 +109,7 @@ const InputForm = ({
           style: {
             background: '#1e60ff',
             color: 'white',
-            bottom:'20px'
+            bottom: '20px',
           },
         }}
       />
