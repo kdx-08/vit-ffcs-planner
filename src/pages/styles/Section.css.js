@@ -23,4 +23,5 @@ export const secbody = style({
   alignItems: 'center',
   justifyContent: 'center',
   textAlign: 'center',
+  marginTop: '3rem',
 });
