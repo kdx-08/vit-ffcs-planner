@@ -85,9 +85,15 @@ const InputForm = ({ handleAdd }) => {
 
   const handleForm = (e) => {
     e.preventDefault();
-    console.log(code);
-    console.log(selectedSlot);
-    console.log(selectedFaculty);
+    const inputCode = code;
+    const inputSlots = selectedSlot;
+    const inputFaculty = selectedFaculty;
+    const classObj = { id: v7(), code: inputCode, slots: inputSlots, faculty: inputFaculty };
+    if (validate(classObj) === 'valid') {
+      toast.success('Course added successfully');
+      handleAdd(classObj);
+    } else if (validate(classObj) === 'exists') toast.error('Course already exists');
+    else toast.error('Something went wrong');
   };
 
   return (
