@@ -120,6 +120,7 @@ const Start = () => {
         setCode={setCode}
         setName={setName}
         handleChange={handleChange}
+        sem={sem}
       />
     </div>
   );
