@@ -19,9 +19,21 @@ const Timetable = () => {
   const [timetableData, setTimeTableData] = useState(getData());
   const [activeList, setActiveList] = useState([]);
   const timetable = getTemplate();
-  console.log(activeList);
+  const allSlots = transform([...Object.keys(getTemplate())]);
 
   useEffect(() => {
+    for (let slot of allSlots) {
+      const block = document.getElementById(slot);
+      block?.classList?.remove(filled);
+    }
+    if (activeList.length > 0) {
+      const transformedSlots = transform(activeList.map((i) => `_${i.toLowerCase()}_`));
+      for (let slot of transformedSlots) {
+        const block = document.getElementById(slot);
+        block.classList.add(filled);
+      }
+    }
+
     for (let course of timetableData) {
       const slots = transform(course.slots.split(',').map((s) => s.toLowerCase()));
       for (let slot of slots) {
@@ -38,7 +50,7 @@ const Timetable = () => {
         }
       }
     }
-  }, []);
+  }, [activeList]);
 
   return (
     <div>

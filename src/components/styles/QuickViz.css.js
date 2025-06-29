@@ -24,7 +24,7 @@ export const row = style({
 export const row_h = style({
   textAlign: 'center',
   fontWeight: 'bold',
-  margin: '1rem',
+  margin: '1rem auto 0rem auto',
 });
 
 export const button = style({
