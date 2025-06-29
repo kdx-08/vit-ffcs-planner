@@ -1,3 +1,5 @@
+import { slotList } from './slotList';
+
 export const getData = () => {
   if (localStorage.getItem('ffcs_planner_data'))
     return JSON.parse(localStorage.getItem('ffcs_planner_data'));
@@ -20,4 +22,12 @@ export const validate = ({ code, slots, faculty }) => {
     }
   }
   return 'valid';
+};
+
+export const transform = (slots) => {
+  let transformedSlots = [];
+  for (let slot of slots) {
+    transformedSlots = transformedSlots.concat(slotList.filter((s) => s.includes(slot)));
+  }
+  return transformedSlots;
 };
