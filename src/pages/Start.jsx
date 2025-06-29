@@ -13,24 +13,24 @@ const Start = () => {
   const [coursesuggestion, setCoursesuggestion] = useState([]);
   const date = new Date();
   const [sem, setSem] = useState(date.getMonth() >= 5 && date.getMonth() <= 10 ? 'fall' : 'winter');
-  const [data,setData]=useState([]);
+  const [data, setData] = useState([]);
 
-  useEffect(()=>{
-    async function loadData(){
-      try{
+  useEffect(() => {
+    async function loadData() {
+      try {
         let module;
-        if(sem==='fall'){
+        if (sem === 'fall') {
           module = await import('../models/fall.json');
-        }else{
+        } else {
           module = await import('../models/winter.json');
         }
         setData(module.default);
-      }catch(error){
-        console.log('Error loading JSON: ',error);
+      } catch (error) {
+        console.log('Error loading JSON: ', error);
       }
     }
     loadData();
-  },[sem])
+  }, [sem]);
 
   useEffect(() => {
     const data = getData();

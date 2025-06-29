@@ -82,5 +82,5 @@ export const light = style({
 });
 
 export const highlight = style({
-  backgroundColor:vars.color.thead,
-})
+  backgroundColor: vars.color.thead,
+});
