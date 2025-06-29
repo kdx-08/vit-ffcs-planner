@@ -5,8 +5,8 @@ const CourseItem = ({ course, handleDelete, id }) => {
     <div className={item}>
       <div className={desc}>
         <p>Course Code: {course.code}</p>
-        <p>Course Slot: {course.slots}</p>
-        <p>Course Slot: {course.facs}</p>
+        <p>Course Slot: {course.slots.replaceAll('_', '').replaceAll(',', '+')}</p>
+        <p>Course Faculy: {course.faculty}</p>
       </div>
       <button className={crossBtn} onClick={() => handleDelete(id)}>
         &#x2715;
