@@ -17,7 +17,6 @@ const CourseList = ({ courses, handleDelete, handleChange }) => {
               <span className={listTitle}>Actions</span>
             </div>
             {courses.map((course, index) => (
-              <>
               <CourseItem
                 course={course}
                 handleDelete={handleDelete}
@@ -25,8 +24,6 @@ const CourseList = ({ courses, handleDelete, handleChange }) => {
                 key={course.id}
                 handleChange={handleChange}
               />
-              </>
-              
             ))}
           </div>
         ) : (
