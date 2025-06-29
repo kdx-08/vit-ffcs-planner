@@ -23,6 +23,7 @@ export const theader = style({
 
 export const table = style({
   borderCollapse: 'collapse',
+  marginBottom: '3rem',
 });
 
 export const tdefault = style({
@@ -34,19 +35,28 @@ export const tdefault = style({
     },
   },
   height: '80px',
-  width: '80px',
+  width: '100px',
+});
+
+export const lunch_bg = style({
+  backgroundColor: vars.color.lunch,
+  padding: '0.5rem',
 });
 
 export const lunch = style({
-  backgroundColor: vars.color.lunch,
-  writingMode: 'vertical-lr',
-  textAlign: 'center',
-  verticalAlign: 'middle',
-  letterSpacing: 4,
-  textOrientation: 'upright',
-  fontWeight: 700,
-  border: `1px solid ${vars.color.border}`,
-  lineHeight: '1.2',
+  // writingMode: 'vertical-lr',
+  // textAlign: 'center',
+  // verticalAlign: 'middle',
+  // letterSpacing: 4,
+  // textOrientation: 'upright',
+  // fontWeight: 700,
+  // border: `1px solid ${vars.color.border}`,
+  // lineHeight: '1.2',
+  display: 'flex',
+  flexDirection: 'column',
+  flex: 1,
+  gap: '0.5rem',
+  fontWeight: 'bold',
 });
 
 export const day = style({
@@ -59,15 +69,15 @@ export const day = style({
 });
 
 export const filled = style({
-  backgroundColor: 'lime',
+  backgroundColor: '#b8fc92',
   ':hover': {
-    backgroundColor: 'lime',
+    backgroundColor: '#b8fc92',
   },
 });
 
 export const clash = style({
-  backgroundColor: 'red',
+  backgroundColor: '#ff6161',
   ':hover': {
-    backgroundColor: 'red',
+    backgroundColor: '#ff6161',
   },
 });
