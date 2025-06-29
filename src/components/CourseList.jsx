@@ -3,7 +3,7 @@ import { sechead } from '../pages/styles/Section.css';
 import { noCaption, courseContainer, listTitle } from './styles/CourseList.css';
 import { desc, item } from './styles/CourseItem.css';
 
-const CourseList = ({ courses, handleDelete, handleChange,sem }) => {
+const CourseList = ({ courses, handleDelete, handleChange, sem }) => {
   return (
     <div>
       <h2 className={sechead}>Course List</h2>

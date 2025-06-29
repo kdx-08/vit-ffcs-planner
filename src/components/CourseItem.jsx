@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { crossBtn, desc, dropdown, item, tickBtn } from './styles/CourseItem.css';
 
-const CourseItem = ({ course, handleDelete, id, handleChange,sem }) => {
+const CourseItem = ({ course, handleDelete, id, handleChange, sem }) => {
   const [slots, setSlots] = useState([]);
   const [faculties, setFaculties] = useState([]);
   const [selectedSlot, setSelectedSlot] = useState(course.slots);
@@ -28,28 +28,28 @@ const CourseItem = ({ course, handleDelete, id, handleChange,sem }) => {
     setFaculties([...facultiesSet]);
   };
 
-  useEffect(()=>{
-      async function loadData(){
-        try{
-          let module;
-          if(sem==='fall'){
-            module = await import('../models/fall.json');
-          }else{
-            module = await import('../models/winter.json');
-          }
-          setData(module.default);
-        }catch(error){
-          console.log('Error loading JSON: ',error);
+  useEffect(() => {
+    async function loadData() {
+      try {
+        let module;
+        if (sem === 'fall') {
+          module = await import('../models/fall.json');
+        } else {
+          module = await import('../models/winter.json');
         }
+        setData(module.default);
+      } catch (error) {
+        console.log('Error loading JSON: ', error);
       }
-      loadData();
-    },[])
+    }
+    loadData();
+  }, []);
 
   useEffect(() => {
-    if(data.length>0){
+    if (data.length > 0) {
       handleCode();
     }
-  },[data]);
+  }, [data]);
 
   const handleSlot = (e) => {
     const input = e.target.value;
