@@ -46,13 +46,13 @@ const InputForm = ({ handleAdd }) => {
               display: key,
               code: item['COURSE CODE'],
               title: item['COURSE TITLE'],
-              slots: [item['SLOT']],
-              faculties: [item['EMPLOYEE NAME']],
+              slots: new Set([item['SLOT']]),
+              faculties: new Set([item['EMPLOYEE NAME']]),
             });
           } else {
             const existing = acc.items.find((i) => i.code === item['COURSE CODE']);
-            existing.slots.push(item.SLOT);
-            existing.faculties.push(item['EMPLOYEE NAME']);
+            existing.slots.add(item.SLOT);
+            existing.faculties.add(item['EMPLOYEE NAME']);
           }
           return acc;
         },
@@ -65,8 +65,8 @@ const InputForm = ({ handleAdd }) => {
   const handleCourse = (item) => {
     setCode(item.code);
     setName(item.title);
-    setSlots(item.slots);
-    setFaculties(item.faculties);
+    setSlots([...item.slots]);
+    setFaculties([...item.faculties]);
   };
 
   const handleSlot = (e) => {
