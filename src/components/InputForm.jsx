@@ -27,7 +27,7 @@ const InputForm = ({
   sem,
   setSem,
   setCode,
-  setName
+  setName,
 }) => {
   const [suggestIdx, setSuggestIdx] = useState(-1);
 
@@ -38,12 +38,12 @@ const InputForm = ({
   const handleKeyPress = (e) => {
     if (suggestIdx > -1 && e.key === 'ArrowUp') {
       setSuggestIdx((prev) => prev - 1);
-    } else if ( suggestIdx<9 && e.key === 'ArrowDown') {
+    } else if (suggestIdx < 9 && e.key === 'ArrowDown') {
       setSuggestIdx((prev) => prev + 1);
     }
-    if(e.key==='Enter'){
+    if (e.key === 'Enter') {
       e.preventDefault();
-      const index=suggestIdx>=0?suggestIdx:0;
+      const index = suggestIdx >= 0 ? suggestIdx : 0;
       setCode(coursesuggestion[index].code);
       setName(coursesuggestion[index].title);
     }
