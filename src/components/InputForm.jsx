@@ -10,6 +10,7 @@ import {
   suggestion,
   suggestitem,
   light,
+  highlight,
 } from './styles/InputForm.css.js';
 import { toast, Toaster } from 'react-hot-toast';
 import { validate } from '../utils/functions.js';
@@ -25,9 +26,27 @@ const InputForm = ({
   handleReset,
   sem,
   setSem,
+  setCode,
+  setName
 }) => {
+  const [suggestIdx, setSuggestIdx] = useState(-1);
+
   const handleSem = (e) => {
     setSem(e.target.value);
+  };
+
+  const handleKeyPress = (e) => {
+    if (suggestIdx >= -1 && e.key === 'ArrowUp') {
+      setSuggestIdx((prev) => prev - 1);
+    } else if (e.key === 'ArrowDown') {
+      setSuggestIdx((prev) => prev + 1);
+    }
+    if(e.key==='Enter'){
+      e.preventDefault();
+      const index=suggestIdx>=0?suggestIdx:0;
+      setCode(coursesuggestion[index].code);
+      setName(coursesuggestion[index].title);
+    }
   };
 
   const handleForm = (e) => {
@@ -69,15 +88,23 @@ const InputForm = ({
           name="ccode"
           id="ccode"
           value={code}
+          onKeyDown={handleKeyPress}
           onChange={handleCode}
+          autoComplete="off"
           autoFocus
         />
         {!name && coursesuggestion.length > 0 && code.length > 0 ? (
           <ul className={suggestion}>
             {coursesuggestion.slice(0, 10).map((item, index) => (
-              <li className={suggestitem} key={index} onClick={() => handleCourse(item)}>
-                {item.display.slice(0, 42)}..
-              </li>
+              <>
+                <li
+                  className={`${suggestitem} ${index === suggestIdx ? highlight : ''}`}
+                  key={index}
+                  onClick={() => handleCourse(item)}
+                >
+                  {item.display.slice(0, 42)}..
+                </li>
+              </>
             ))}
           </ul>
         ) : (

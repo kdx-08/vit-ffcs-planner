@@ -111,6 +111,8 @@ const Start = () => {
         name={name}
         sem={sem}
         setSem={setSem}
+        setCode={setCode}
+        setName={setName}
       />
       <CourseList
         courses={courses}
