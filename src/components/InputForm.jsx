@@ -36,9 +36,9 @@ const InputForm = ({
   };
 
   const handleKeyPress = (e) => {
-    if (suggestIdx >= -1 && e.key === 'ArrowUp') {
+    if (suggestIdx > -1 && e.key === 'ArrowUp') {
       setSuggestIdx((prev) => prev - 1);
-    } else if (e.key === 'ArrowDown') {
+    } else if ( suggestIdx<9 && e.key === 'ArrowDown') {
       setSuggestIdx((prev) => prev + 1);
     }
     if(e.key==='Enter'){
