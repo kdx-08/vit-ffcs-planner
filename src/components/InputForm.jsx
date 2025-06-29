@@ -9,123 +9,32 @@ import {
   buttons,
   suggestion,
   suggestitem,
+  light,
 } from './styles/InputForm.css.js';
 import { toast, Toaster } from 'react-hot-toast';
 import { validate } from '../utils/functions.js';
 import { v7 } from 'uuid';
-import data from '../models/fall.json';
 
-const InputForm = ({ handleAdd }) => {
+const InputForm = ({ handleAdd,handleCode,handleCourse,coursesuggestion,code,name,handleReset}) => {
   const [sem, setSem] = useState('');
-  const [code, setCode] = useState('');
-  const [name, setName] = useState('');
-  const [slots, setSlots] = useState([]);
-  const [faculties, setFaculties] = useState([]);
-  const [coursesuggestion, setCoursesuggestion] = useState([]);
-  const [selectedSlot, setSelectedSlot] = useState('');
-  const [selectedFaculty, setSelectedFaculty] = useState('');
-  const [selectedSlotOg, setSelectedSlotOg] = useState('');
   const handleSem = (e) => {
     setSem(e.target.value.toUpperCase());
-  };
-
-  const handleCode = (e) => {
-    const input = e.target.value.toUpperCase();
-    setCode(input);
-    const suggestions = data
-      .filter(
-        (item) =>
-          item['COURSE CODE'].includes(input) || item['COURSE TITLE'].toUpperCase().includes(input)
-      )
-      .reduce(
-        (acc, item) => {
-          const key = `${item['COURSE CODE']} - ${item['COURSE TITLE']}`;
-          if (!acc.map.has(key)) {
-            acc.map.set(key, true);
-            acc.items.push({
-              display: key,
-              code: item['COURSE CODE'],
-              title: item['COURSE TITLE'],
-              slots: new Set([item['SLOT']]),
-              faculties: new Set([item['EMPLOYEE NAME']]),
-            });
-          } else {
-            const existing = acc.items.find((i) => i.code === item['COURSE CODE']);
-            existing.slots.add(item.SLOT);
-            existing.faculties.add(item['EMPLOYEE NAME']);
-          }
-          return acc;
-        },
-        { items: [], map: new Map() }
-      ).items;
-    setCoursesuggestion(suggestions);
-    setName('');
-  };
-
-  const handleCourse = (item) => {
-    setCode(item.code);
-    setName(item.title);
-    setSlots([...item.slots]);
-    setFaculties([...item.faculties]);
-  };
-
-  const handleSlot = (e) => {
-    const input = e.target.value;
-    setSelectedSlotOg(input);
-    const slotarr = input.split('+');
-    var slotstr = '';
-    for (var i = 0; i < slotarr.length - 1; i++) {
-      slotstr += `_${slotarr[i]}_,`;
-    }
-    slotstr += `_${slotarr[slotarr.length - 1]}_`;
-    setSelectedSlot(slotstr.toUpperCase());
-    const matchingFaculties = data
-      .filter((item) => item['COURSE CODE'] === code && item.SLOT === input)
-      .map((item) => item['EMPLOYEE NAME'].toUpperCase());
-    setFaculties([...new Set(matchingFaculties)]);
-    if (!matchingFaculties.includes(selectedFaculty.toUpperCase())) {
-      setSelectedFaculty('');
-    }
-  };
-
-  const handleFaculty = (e) => {
-    const input = e.target.value.toUpperCase();
-    setSelectedFaculty(input);
-    const matchingSlots = data
-      .filter(
-        (item) => item['COURSE CODE'] === code && item['EMPLOYEE NAME'].toUpperCase() === input
-      )
-      .map((item) => item.SLOT.toUpperCase());
-    setSlots([...new Set(matchingSlots)]);
-    if (!matchingSlots.includes(selectedSlotOg.toUpperCase())) {
-      setSelectedSlot('');
-      setSelectedSlotOg('');
-    }
   };
 
   const handleForm = (e) => {
     e.preventDefault();
     const inputCode = code;
-    const inputSlots = selectedSlot;
-    const inputFaculty = selectedFaculty;
-    const classObj = { id: v7(), code: inputCode, slots: inputSlots, faculty: inputFaculty };
-    if (inputCode === '' || inputSlots === '' || inputFaculty === '') {
+    const classObj = { id: v7(), code: inputCode, slots: '', faculty: '' };
+    if (inputCode === '') {
       toast.error('Invalid input');
       return;
     }
     if (validate(classObj) === 'valid') {
       toast.success('Course added successfully');
       handleAdd(classObj);
+      handleReset(e);
     } else if (validate(classObj) === 'exists') toast.error('Course already exists');
     else toast.error('Something went wrong');
-  };
-
-  const handleReset = (e) => {
-    e.preventDefault();
-    setCode('');
-    setSelectedFaculty('');
-    setSelectedSlot('');
-    setSelectedSlotOg('');
   };
 
   return (
@@ -141,11 +50,11 @@ const InputForm = ({ handleAdd }) => {
       </div>
       <div className={section}>
         <label className={label} htmlFor="ccode">
-          Code:
+          Course:
         </label>
         <input
           required
-          placeholder="BCSE102L"
+          placeholder="Course Code or Title"
           className={input}
           type="text"
           name="ccode"
@@ -167,48 +76,8 @@ const InputForm = ({ handleAdd }) => {
         )}
       </div>
       <div className={section}>
-        <label className={label} htmlFor="slots">
-          Slot:
-        </label>
-        <select
-          name="slots"
-          id="slots"
-          disabled={slots.length == 0}
-          className={input}
-          onChange={handleSlot}
-          value={selectedSlotOg}
-        >
-          <option value="" disabled hidden>
-            Select Slot
-          </option>
-          {slots.map((item, index) => (
-            <option key={index} value={item}>
-              {item}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div className={section}>
-        <label className={label} htmlFor="faculties">
-          Faculty:
-        </label>
-        <select
-          name="faculties"
-          id="faculties"
-          disabled={faculties.length == 0}
-          className={input}
-          onChange={handleFaculty}
-          value={selectedFaculty}
-        >
-          <option value="" disabled hidden>
-            Select Faculty
-          </option>
-          {faculties.map((item, index) => (
-            <option key={index} value={item}>
-              {item}
-            </option>
-          ))}
-        </select>
+        <label className={`${label} ${name?"":light}`} htmlFor='title'>Title:</label>
+        {name?<span className={input}>{name}</span>:<span className={`${input} ${light}`}>Course Title</span>}
       </div>
       <div className={buttons}>
         <button className={reset} onClick={handleReset}>
