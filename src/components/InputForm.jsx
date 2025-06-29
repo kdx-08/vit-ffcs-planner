@@ -109,11 +109,23 @@ const InputForm = ({ handleAdd }) => {
     const inputSlots = selectedSlot;
     const inputFaculty = selectedFaculty;
     const classObj = { id: v7(), code: inputCode, slots: inputSlots, faculty: inputFaculty };
+    if (inputCode === '' || inputSlots === '' || inputFaculty === '') {
+      toast.error('Invalid input');
+      return;
+    }
     if (validate(classObj) === 'valid') {
       toast.success('Course added successfully');
       handleAdd(classObj);
     } else if (validate(classObj) === 'exists') toast.error('Course already exists');
     else toast.error('Something went wrong');
+  };
+
+  const handleReset = (e) => {
+    e.preventDefault();
+    setCode('');
+    setSelectedFaculty('');
+    setSelectedSlot('');
+    setSelectedSlotOg('');
   };
 
   return (
@@ -138,7 +150,7 @@ const InputForm = ({ handleAdd }) => {
           type="text"
           name="ccode"
           id="ccode"
-          value={`${code}${name.length > 0 ? ' - ' + name : ''}`}
+          value={code}
           onChange={handleCode}
           autoFocus
         />
@@ -199,7 +211,7 @@ const InputForm = ({ handleAdd }) => {
         </select>
       </div>
       <div className={buttons}>
-        <button type="reset" className={reset}>
+        <button className={reset} onClick={handleReset}>
           Reset
         </button>
         <button type="submit" className={addBtn}>
